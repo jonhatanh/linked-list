@@ -45,10 +45,10 @@ const optionsMap = {
     log(chalk.yellow(list.size()));
   },
   4() {
-    log(chalk.yellow(list.head().value));
+    log(chalk.yellow(list.head()?.value ?? null));
   },
   5() {
-    log(chalk.yellow(list.tail().value));
+    log(chalk.yellow(list.tail()?.value ?? null));
   },
   6() {
     const index = readlineSync.question("Node index: ");
@@ -82,6 +82,23 @@ const optionsMap = {
   10() {
     log(chalk.yellow(list.toString()));
   },
+  11() {
+    const value = readlineSync.question("Value: ");
+    const index = readlineSync.question("At index: ");
+    list.insertAt(value, index);
+    log(chalk.yellow("Item Added"));
+  },
+  12() {
+    const index = readlineSync.question("At index: ");
+    const removed = list.removeAt(index);
+    removed
+      ? log(chalk.yellow("Item Removed"))
+      : log(chalk.red("Invalid Index"));
+  },
+  13() {
+    list.clear();
+    log(chalk.red.bgMagenta('Done!'))
+  }
 };
 
 while (exit === false) {
